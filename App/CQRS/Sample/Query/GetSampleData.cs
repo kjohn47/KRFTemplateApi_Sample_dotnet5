@@ -14,7 +14,7 @@
     using KRFTemplateApi.App.DatabaseQueries;
     using System.Collections.Generic;
 
-    public class GetSampleData : IQuery<SampleInput, SampleOutput[]>
+    public class GetSampleData : IQuery<SampleInput, SampleOutput>
     {
         private IUserContext _userContext;
 
@@ -25,11 +25,11 @@
             this._sampleDB = sampleDB.Value;
         }
 
-        private async Task<SampleOutput> GetNextValue(Random rng, int index)
+        private async Task<SampleOutputItem> GetNextValue(Random rng, int index)
         {
             var temp = rng.Next(-60, 60);
             var dbResult = await this._sampleDB.GetSampleFromTemperatureAsync(temp);
-            return new SampleOutput
+            return new SampleOutputItem
             {
                 Date = DateTime.Now.AddDays(index),
                 TemperatureC = temp,
@@ -38,10 +38,10 @@
             };
         }
 
-        private async Task<SampleOutput[]> MakeDataResult()
+        private async Task<IEnumerable<SampleOutputItem>> MakeDataResult()
         {
             var rng = new Random();
-            var output = new List<SampleOutput>();
+            var output = new List<SampleOutputItem>();
 
             for(int i = 1; i<= 5; i++)
             {
@@ -49,19 +49,21 @@
                 output.Add(r);
             }
 
-            return output.ToArray();
+            return output;
         }
 
-        public async Task<IResponseOut<SampleOutput[]>> QueryAsync(SampleInput request)
+        public async Task<IResponseOut<SampleOutput>> QueryAsync(SampleInput request)
         {
             var result = await this.MakeDataResult();
             
             if(result == null || !result.Any())
             {
-                return ResponseOut<SampleOutput[]>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.BadRequest, "Error Ocurred, no results", ResponseErrorType.Unknown));
+                return ResponseOut<SampleOutput>.GenerateFault(new ErrorOut(System.Net.HttpStatusCode.BadRequest, "Error Ocurred, no results", ResponseErrorType.Unknown));
             }
 
-            return ResponseOut<SampleOutput[]>.GenerateResult(result);
+            return ResponseOut<SampleOutput>.GenerateResult(new SampleOutput { 
+                Output = result
+            });
         }
     }
 }

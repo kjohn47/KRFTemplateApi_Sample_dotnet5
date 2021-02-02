@@ -27,27 +27,27 @@
         }
 
         [HttpGet("GetData")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof( SampleOutput[] ))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SampleOutput))]
         public async Task<IActionResult> GetData(
-                [FromServices] IQuery<SampleInput, SampleOutput[]> query )
+                [FromServices] IQuery<SampleInput, SampleOutput> query )
         {
             return await this.ExecuteAsyncQuery(new SampleInput(), query);
         }
 
         [Authorize]
         [HttpGet("GetDataAuth")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SampleOutput[]))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SampleOutput))]
         public async Task<IActionResult> GetDataAuth(
-        [FromServices] IQuery<SampleInput, SampleOutput[]> query)
+        [FromServices] IQuery<SampleInput, SampleOutput> query)
         {
             return await this.ExecuteAsyncQuery(new SampleInput(), query);
         }
 
         [Authorize(Policies.Admin)]
         [HttpGet("GetDataAuthAdmin")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SampleOutput[]))]
+        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SampleOutput))]
         public async Task<IActionResult> GetDataAuthAdmin(
-        [FromServices] IQuery<SampleInput, SampleOutput[]> query)
+        [FromServices] IQuery<SampleInput, SampleOutput> query)
         {
             return await this.ExecuteAsyncQuery(new SampleInput(), query);
         }

@@ -5,8 +5,10 @@
     using System.Collections.Generic;
     using Microsoft.EntityFrameworkCore;
 
+    using KRFCommon.Database;
+
     using KRFTemplateApi.Domain.Database.Sample;
-    using KRFTemplateApi.Infrastructure.Database.Context;
+    using KRFTemplateApi.Infrastructure.Database.Context;    
 
     public class SampleDatabaseQuery: ISampleDatabaseQuery
     {
@@ -32,7 +34,7 @@
                 .FirstOrDefaultAsync();
         }
 
-        public async Task<string> AddTemperatureRangeAsync(int min, int max, string code, string description)
+        public async Task<IQueryCommand> AddTemperatureRangeAsync(int min, int max, string code, string description)
         {
             var db_range = await this._sampleDBContext.SampleTable.AsNoTracking()
                         .Where(q => (min >= q.TemperatureMin && min <= q.TemperatureMax) ||
@@ -41,7 +43,11 @@
 
             if (db_range > 0)
             {
-                return "Range overlaps with existent data";
+                return new QueryCommand
+                {
+                    Result = QueryResultEnum.Error,
+                    ResultDescription = "Range overlaps with existent data"
+                };
             }
 
             var db_code = await this._sampleDBContext.SampleTable.AsNoTracking()
@@ -50,7 +56,11 @@
 
             if (db_code > 0)
             {
-                return "Code already exists";
+                return new QueryCommand
+                {
+                    Result = QueryResultEnum.Error,
+                    ResultDescription = "Code already exists"
+                };
             }
 
             var newData = new SampleTable
@@ -64,7 +74,10 @@
             await this._sampleDBContext.SampleTable.AddAsync(newData);
             await this._sampleDBContext.SaveChangesAsync();
 
-            return string.Empty;
+            return new QueryCommand {
+                Result = QueryResultEnum.Success,
+                ResultDescription = "Added new sample with success"
+            };
         }
     }
 }

@@ -10,4 +10,8 @@
     <Folder Include="Constants\" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="KRFCommon" Version="1.2.5.1" />
+  </ItemGroup>
+
 </Project>

@@ -11,7 +11,7 @@
     {      
         public static void InjectQuery( IServiceCollection services )
         {
-            services.AddTransient<IQuery<SampleInput, SampleOutput[]>, GetSampleData>();
+            services.AddTransient<IQuery<SampleInput, SampleOutput>, GetSampleData>();
             services.AddTransient<IQuery<ListSampleInput, ListSampleOutput>, ListaAllSample>();
         }
     }

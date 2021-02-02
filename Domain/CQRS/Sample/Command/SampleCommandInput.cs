@@ -1,6 +1,8 @@
 ﻿namespace KRFTemplateApi.Domain.CQRS.Sample.Command
 {
-    public class SampleCommandInput
+    using KRFCommon.CQRS.Command;
+
+    public class SampleCommandInput: ICommandRequest
     {
         public int Max { get; set; }
         public int Min { get; set; }

@@ -1,6 +1,8 @@
 ﻿namespace KRFTemplateApi.Domain.CQRS.Sample.Query
 {
-    public class ListSampleInput
+    using KRFCommon.CQRS.Query;
+
+    public class ListSampleInput: IQueryRequest
     {
         public string Code { get; set; }
     }

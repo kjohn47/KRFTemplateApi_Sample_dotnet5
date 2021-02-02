@@ -2,9 +2,11 @@
 {
     using System.Collections.Generic;
 
+    using KRFCommon.CQRS.Query;
+
     using KRFTemplateApi.Domain.Database.Sample;
 
-    public class ListSampleOutput
+    public class ListSampleOutput: IQueryResponse
     {
         public IEnumerable<SampleTable> Samples { get; set; }
     }

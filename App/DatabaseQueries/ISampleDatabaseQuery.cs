@@ -3,6 +3,8 @@
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
+    using KRFCommon.Database;
+
     using KRFTemplateApi.Domain.Database.Sample;
 
     public interface ISampleDatabaseQuery
@@ -11,6 +13,6 @@
 
         Task<SampleQueryByTemperature> GetSampleFromTemperatureAsync(int temperature);
 
-        Task<string> AddTemperatureRangeAsync(int min, int max, string code, string description);
+        Task<IQueryCommand> AddTemperatureRangeAsync(int min, int max, string code, string description);
     }
 }

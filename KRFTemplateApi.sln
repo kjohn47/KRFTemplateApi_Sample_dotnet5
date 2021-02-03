@@ -3,13 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29609.76
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{EC2FC5E5-8F54-4066-A783-00F134579370}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KRFTemplateApi_src", "KRFTemplateApi_src", "{A0874DFA-41A2-456C-A0BC-D3494643C7FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "App\App.csproj", "{4263790C-D9D8-4C7A-9A72-429E2DA884A4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "KRFTemplateApi_src\WebApi\WebApi.csproj", "{EC2FC5E5-8F54-4066-A783-00F134579370}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{B2EB4A6A-D0C9-47CA-B735-A9F902A3B19A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App", "KRFTemplateApi_src\App\App.csproj", "{4263790C-D9D8-4C7A-9A72-429E2DA884A4}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "Infrastructure\Infrastructure.csproj", "{9844F6BC-DC6C-45EA-8BEA-CB832342F43C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "KRFTemplateApi_src\Domain\Domain.csproj", "{B2EB4A6A-D0C9-47CA-B735-A9F902A3B19A}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "KRFTemplateApi_src\Infrastructure\Infrastructure.csproj", "{9844F6BC-DC6C-45EA-8BEA-CB832342F43C}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KRFTemplateApi_Tests", "KRFTemplateApi_Tests", "{C7A018C9-88CC-47FB-9956-488A3DCC5A13}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,6 +40,12 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{EC2FC5E5-8F54-4066-A783-00F134579370} = {A0874DFA-41A2-456C-A0BC-D3494643C7FB}
+		{4263790C-D9D8-4C7A-9A72-429E2DA884A4} = {A0874DFA-41A2-456C-A0BC-D3494643C7FB}
+		{B2EB4A6A-D0C9-47CA-B735-A9F902A3B19A} = {A0874DFA-41A2-456C-A0BC-D3494643C7FB}
+		{9844F6BC-DC6C-45EA-8BEA-CB832342F43C} = {A0874DFA-41A2-456C-A0BC-D3494643C7FB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {37B1C453-E323-4AE9-8147-D964EC639FAA}

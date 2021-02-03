@@ -1,5 +1,26 @@
 KRFTemplateApi
 
+Important:
+Add KRFCommon nuget repository
+*you can add nuget.config file to solution root or add to your user for use in all projects on file bellow
+C:\Users\[your_username]\AppData\Roaming\NuGet\NuGet.Config
+
+Add your repository for nugget generated from KRFCommon project (example github)
+
+    <packageSources>
+        <clear />
+        <add key="github" value="https://nuget.pkg.github.com/kjohn47/index.json" />
+        <add key="Nuget.org" value="https://api.nuget.org/v3/index.json" />
+    </packageSources>
+    <packageSourceCredentials>
+        <github>
+            <add key="Username" value="###USERNAME###" />
+            <add key="ClearTextPassword" value="###TOKEN###" />
+        </github>
+    </packageSourceCredentials>
+
+Set WebApi as startup project and use Kestrel profile
+
 Access Token
 	Configure token and app info on appsettings AppConfiguration
 	Some modules are part of KRFCommon nuget

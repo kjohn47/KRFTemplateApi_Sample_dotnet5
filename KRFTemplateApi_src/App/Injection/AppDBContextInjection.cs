@@ -12,7 +12,6 @@
     {
         public static void InjectDBContext(IServiceCollection services, string connectionString, string migrationAssembly, bool useLocalDb = false, string apiDbFolder = null)
         {
-            services.AddEntityFrameworkSqlServer();
             services.AddDbContext<SampleDBContext>(opt =>
             {
                 opt.UseSqlServer(useLocalDb && !string.IsNullOrEmpty(apiDbFolder) 

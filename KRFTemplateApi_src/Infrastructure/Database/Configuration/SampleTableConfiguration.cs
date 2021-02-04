@@ -10,8 +10,9 @@
         public static void Configure(EntityTypeBuilder<SampleTable> entity)
         {
             entity.ToTable("SampleTable");
+            entity.HasKey(s => s.Code).HasName("PK_SAMPLE");
             entity.Property(x => x.Code).HasMaxLength(100).IsRequired();
-            entity.Property(x => x.Description).IsRequired();
+            entity.Property(x => x.Description).HasMaxLength(200).IsRequired();
             entity.Property(x => x.TemperatureMin).IsRequired();
             entity.Property(x => x.TemperatureMax).IsRequired();
 

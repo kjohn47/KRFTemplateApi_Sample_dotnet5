@@ -15,6 +15,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "KRFTempla
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KRFTemplateApi_Tests", "KRFTemplateApi_Tests", "{C7A018C9-88CC-47FB-9956-488A3DCC5A13}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "KRFTemplateApi_Tests\UnitTest\UnitTest.csproj", "{BC414388-4CC8-4A57-A6E4-0B46B3D646D1}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +39,10 @@ Global
 		{9844F6BC-DC6C-45EA-8BEA-CB832342F43C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9844F6BC-DC6C-45EA-8BEA-CB832342F43C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9844F6BC-DC6C-45EA-8BEA-CB832342F43C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BC414388-4CC8-4A57-A6E4-0B46B3D646D1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BC414388-4CC8-4A57-A6E4-0B46B3D646D1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BC414388-4CC8-4A57-A6E4-0B46B3D646D1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BC414388-4CC8-4A57-A6E4-0B46B3D646D1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -46,6 +52,7 @@ Global
 		{4263790C-D9D8-4C7A-9A72-429E2DA884A4} = {A0874DFA-41A2-456C-A0BC-D3494643C7FB}
 		{B2EB4A6A-D0C9-47CA-B735-A9F902A3B19A} = {A0874DFA-41A2-456C-A0BC-D3494643C7FB}
 		{9844F6BC-DC6C-45EA-8BEA-CB832342F43C} = {A0874DFA-41A2-456C-A0BC-D3494643C7FB}
+		{BC414388-4CC8-4A57-A6E4-0B46B3D646D1} = {C7A018C9-88CC-47FB-9956-488A3DCC5A13}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {37B1C453-E323-4AE9-8147-D964EC639FAA}

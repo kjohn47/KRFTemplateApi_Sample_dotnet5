@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="KRFCommon" Version="1.2.5.1" />
+    <PackageReference Include="KRFCommon" Version="1.2.5.3" />
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Abstractions" Version="5.0.2" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Analyzers" Version="5.0.2" />
@@ -24,11 +24,11 @@
   </ItemGroup>  
 
   <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>  
+    <Folder Include="Migrations\" />
+  </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Migrations\" />
+    <ProjectReference Include="..\Domain\Domain.csproj" />
   </ItemGroup>
 
 </Project>

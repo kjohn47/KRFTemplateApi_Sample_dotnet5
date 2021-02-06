@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KRFTemplateApi.Infrastructure.Migrations
 {
     [DbContext(typeof(SampleDBContext))]
-    [Migration("20210204192647_initialize_sample")]
+    [Migration("20210206163543_initialize_sample")]
     partial class initialize_sample
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

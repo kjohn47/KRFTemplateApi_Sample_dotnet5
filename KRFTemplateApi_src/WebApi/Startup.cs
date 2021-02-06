@@ -20,13 +20,13 @@ namespace KRFTemplateApi.WebApi
     {
         public Startup( IConfiguration configuration, IWebHostEnvironment env )
         {
-            this.Configuration=configuration;
-            this._apiSettings=configuration.GetSection( KRFApiSettings.AppConfiguration_Key ).Get<AppConfiguration>();
-            this._requestContext=configuration.GetSection( KRFApiSettings.RequestContext_Key ).Get<RequestContext>();
-            this._databases=configuration.GetSection( KRFApiSettings.KRFDatabases_Key ).Get<KRFDatabases>();
-            this._enableLogs=configuration.GetValue( KRFApiSettings.LogsOnPrd_Key, false );
+            this.Configuration = configuration;
+            this._apiSettings = configuration.GetSection( KRFApiSettings.AppConfiguration_Key ).Get<AppConfiguration>();
+            this._requestContext = configuration.GetSection( KRFApiSettings.RequestContext_Key ).Get<RequestContext>();
+            this._databases = configuration.GetSection( KRFApiSettings.KRFDatabases_Key ).Get<KRFDatabases>();
+            this._enableLogs = configuration.GetValue( KRFApiSettings.LogsOnPrd_Key, false );
 
-            this.HostingEnvironment=env;
+            this.HostingEnvironment = env;
         }
 
         private readonly AppConfiguration _apiSettings;
@@ -75,15 +75,15 @@ namespace KRFTemplateApi.WebApi
             if ( this.HostingEnvironment.IsDevelopment() )
             {
                 app.UseDeveloperExceptionPage();
-                enableLogs=true;
+                enableLogs = true;
             }
 
-            if ( enableLogs&&this._requestContext.EnableRead )
+            if ( enableLogs && this._requestContext.EnableRead )
             {
                 app.UseMiddleware<KRFBodyRewindMiddleware>( this._requestContext.BufferSize, this._requestContext.MemBufferOnly );
             }
 
-            if ( this._requestContext.EnableRead&&this._requestContext.MemBufferOnly )
+            if ( this._requestContext.EnableRead && this._requestContext.MemBufferOnly )
             {
                 KRFExceptionHandlerMiddleware.Configure( app, loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier, this._requestContext.BufferSize );
             }

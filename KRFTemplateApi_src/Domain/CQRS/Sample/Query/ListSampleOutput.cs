@@ -6,7 +6,7 @@
 
     using KRFTemplateApi.Domain.Database.Sample;
 
-    public class ListSampleOutput: IQueryResponse
+    public class ListSampleOutput : IQueryResponse
     {
         public IEnumerable<SampleTable> Samples { get; set; }
     }

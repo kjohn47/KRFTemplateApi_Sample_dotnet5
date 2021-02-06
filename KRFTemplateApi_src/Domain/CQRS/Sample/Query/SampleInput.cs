@@ -2,7 +2,7 @@
 {
     using KRFCommon.CQRS.Query;
 
-    public class SampleInput: IQueryRequest
+    public class SampleInput : IQueryRequest
     {
     }
 }

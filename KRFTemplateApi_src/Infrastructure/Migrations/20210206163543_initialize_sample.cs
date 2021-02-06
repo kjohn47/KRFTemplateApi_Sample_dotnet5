@@ -2,7 +2,7 @@
 
 namespace KRFTemplateApi.Infrastructure.Migrations
 {
-    public partial class SampleMigration : Migration
+    public partial class initialize_sample : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -11,13 +11,13 @@ namespace KRFTemplateApi.Infrastructure.Migrations
                 columns: table => new
                 {
                     Code = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
                     TemperatureMin = table.Column<int>(type: "int", nullable: false),
                     TemperatureMax = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_SampleTable", x => x.Code);
+                    table.PrimaryKey("PK_SAMPLE", x => x.Code);
                 });
 
             migrationBuilder.InsertData(

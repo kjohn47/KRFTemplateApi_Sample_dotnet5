@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KRFTemplateApi.Infrastructure.Migrations
 {
     [DbContext(typeof(SampleDBContext))]
-    [Migration("20210202114355_SampleMigration")]
-    partial class SampleMigration
+    [Migration("20210206163543_initialize_sample")]
+    partial class initialize_sample
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,8 @@ namespace KRFTemplateApi.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(200)
+                        .HasColumnType("nvarchar(200)");
 
                     b.Property<int>("TemperatureMax")
                         .HasColumnType("int");
@@ -36,7 +37,8 @@ namespace KRFTemplateApi.Infrastructure.Migrations
                     b.Property<int>("TemperatureMin")
                         .HasColumnType("int");
 
-                    b.HasKey("Code");
+                    b.HasKey("Code")
+                        .HasName("PK_SAMPLE");
 
                     b.ToTable("SampleTable");
 

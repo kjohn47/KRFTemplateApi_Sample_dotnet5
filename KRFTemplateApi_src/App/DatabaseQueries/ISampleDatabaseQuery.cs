@@ -1,5 +1,6 @@
 ﻿namespace KRFTemplateApi.App.DatabaseQueries
 {
+    using System;
     using System.Collections.Generic;
     using System.Threading.Tasks;
 
@@ -7,12 +8,12 @@
 
     using KRFTemplateApi.Domain.Database.Sample;
 
-    public interface ISampleDatabaseQuery
+    public interface ISampleDatabaseQuery : IDisposable
     {
-        Task<IEnumerable<SampleTable>> GetSampleListAsync(string code = null);
+        Task<IEnumerable<SampleTable>> GetSampleListAsync( string code = null );
 
-        Task<SampleQueryByTemperature> GetSampleFromTemperatureAsync(int temperature);
+        Task<SampleQueryByTemperature> GetSampleFromTemperatureAsync( int temperature );
 
-        Task<IQueryCommand> AddTemperatureRangeAsync(int min, int max, string code, string description);
+        Task<IQueryCommand> AddTemperatureRangeAsync( int min, int max, string code, string description );
     }
 }

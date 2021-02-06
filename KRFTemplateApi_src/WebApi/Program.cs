@@ -1,45 +1,52 @@
 namespace KRFTemplateApi.WebApi
 {
     using System.Net;
-    using Microsoft.AspNetCore.Hosting;
-    using Microsoft.Extensions.Hosting;
-    using Microsoft.Extensions.Configuration;
 
-    using KRFTemplateApi.App.Constants;
+    using KRFCommon.Api;
+    using KRFCommon.Constants;
+
+    using Microsoft.AspNetCore.Hosting;
+    using Microsoft.AspNetCore.Server.Kestrel.Https;
+    using Microsoft.Extensions.Configuration;
+    using Microsoft.Extensions.Hosting;
 
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main( string[] args )
         {
-            CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder( args ).Build().Run();
         }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Host.CreateDefaultBuilder(args)                
-                .ConfigureWebHostDefaults(webBuilder =>
-                {
-                    webBuilder.UseKestrel((c, o) =>
-                    {
-                        int httpPort = c.Configuration.GetValue(AppConstants.KestrelConfigurationHttpPort, 5051);
-                        int httpsPort = c.Configuration.GetValue(AppConstants.KestrelConfigurationHttpsPort, 15051);
-                        if (c.HostingEnvironment.IsDevelopment())
-                        {
-                            o.ListenLocalhost(httpsPort, l => l.UseHttps( h => {
-                                h.AllowAnyClientCertificate();
-                                h.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
-                            }));
-                            o.ListenLocalhost(httpPort);
-                        }
-                        else
-                        {
-                            o.Listen(IPAddress.Any, httpsPort, l => l.UseHttps(h => {
-                                h.AllowAnyClientCertificate();
-                                h.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
-                            }));
-                            o.Listen(IPAddress.Any, httpPort);
-                        }
-                    })
-                    .UseStartup<Startup>();
-                });
+        public static IHostBuilder CreateHostBuilder( string[] args ) =>
+            Host.CreateDefaultBuilder( args )
+                .ConfigureWebHostDefaults( webBuilder =>
+                 {
+                     webBuilder.UseKestrel( ( c, o ) =>
+                     {
+                         var kestrelSettings = c.Configuration.GetSection( KRFApiSettings.KestrelConfiguration_Key ).Get<KestrelConfiguration>();
+                         int httpPort = kestrelSettings.HttpPort==0 ? 5051 : kestrelSettings.HttpPort;
+                         int httpsPort = kestrelSettings.HttpsPort==0 ? 15051 : kestrelSettings.HttpsPort;
+
+                         if ( c.HostingEnvironment.IsDevelopment() )
+                         {
+                             o.ListenLocalhost( httpsPort, l => l.UseHttps( h =>
+                             {
+                                 h.AllowAnyClientCertificate();
+                                 h.ClientCertificateMode=Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
+                             } ) );
+                             o.ListenLocalhost( httpPort );
+                         }
+                         else
+                         {
+                             o.Listen( IPAddress.Any, httpsPort, l => l.UseHttps( h =>
+                             {
+                                 h.AllowAnyClientCertificate();
+                                 h.ClientCertificateMode=Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
+                             } ) );
+                             o.Listen( IPAddress.Any, httpPort );
+                         }
+                     } )
+                     .UseStartup<Startup>();
+                 } );
     }
 }

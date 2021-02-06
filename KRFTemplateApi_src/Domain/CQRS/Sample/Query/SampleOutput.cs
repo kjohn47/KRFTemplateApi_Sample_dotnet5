@@ -1,5 +1,5 @@
 ﻿namespace KRFTemplateApi.Domain.CQRS.Sample.Query
-{  
+{
     using System.Collections.Generic;
 
     using KRFCommon.CQRS.Query;

@@ -2,8 +2,6 @@
 {
     using System.Net;
     using System.Threading.Tasks;
-    using Microsoft.AspNetCore.Authorization;
-    using Microsoft.AspNetCore.Mvc;
 
     using KRFCommon.Context;
     using KRFCommon.Controller;
@@ -13,52 +11,55 @@
     using KRFTemplateApi.Domain.CQRS.Sample.Command;
     using KRFTemplateApi.Domain.CQRS.Sample.Query;
 
+    using Microsoft.AspNetCore.Authorization;
+    using Microsoft.AspNetCore.Mvc;
+
     [ApiController]
-    [Route("Sample/")]
+    [Route( "Sample/" )]
     public class SampleController : KRFController
     {
-        [HttpGet("ListAll")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(ListSampleOutput))]
+        [HttpGet( "ListAll" )]
+        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( ListSampleOutput ) )]
         public async Task<IActionResult> ListAll(
                 [FromServices] IQuery<ListSampleInput, ListSampleOutput> query,
-                [FromQuery] string code)
+                [FromQuery] string code )
         {
-            return await this.ExecuteAsyncQuery(new ListSampleInput { Code = code }, query);
+            return await this.ExecuteAsyncQuery( new ListSampleInput { Code=code }, query );
         }
 
-        [HttpGet("GetData")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SampleOutput))]
+        [HttpGet( "GetData" )]
+        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
         public async Task<IActionResult> GetData(
                 [FromServices] IQuery<SampleInput, SampleOutput> query )
         {
-            return await this.ExecuteAsyncQuery(new SampleInput(), query);
+            return await this.ExecuteAsyncQuery( new SampleInput(), query );
         }
 
         [Authorize]
-        [HttpGet("GetDataAuth")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SampleOutput))]
+        [HttpGet( "GetDataAuth" )]
+        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
         public async Task<IActionResult> GetDataAuth(
-        [FromServices] IQuery<SampleInput, SampleOutput> query)
+        [FromServices] IQuery<SampleInput, SampleOutput> query )
         {
-            return await this.ExecuteAsyncQuery(new SampleInput(), query);
+            return await this.ExecuteAsyncQuery( new SampleInput(), query );
         }
 
-        [Authorize(Policies.Admin)]
-        [HttpGet("GetDataAuthAdmin")]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type = typeof(SampleOutput))]
+        [Authorize( Policies.Admin )]
+        [HttpGet( "GetDataAuthAdmin" )]
+        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
         public async Task<IActionResult> GetDataAuthAdmin(
-        [FromServices] IQuery<SampleInput, SampleOutput> query)
+        [FromServices] IQuery<SampleInput, SampleOutput> query )
         {
-            return await this.ExecuteAsyncQuery(new SampleInput(), query);
+            return await this.ExecuteAsyncQuery( new SampleInput(), query );
         }
 
         [HttpPost]
-        [ProducesResponseType((int)HttpStatusCode.OK, Type =typeof(SampleCommandOutput))]
+        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( SampleCommandOutput ) )]
         public async Task<IActionResult> PostSampleData(
             [FromBody] SampleCommandInput request,
-            [FromServices] ICommand<SampleCommandInput, SampleCommandOutput> command)
+            [FromServices] ICommand<SampleCommandInput, SampleCommandOutput> command )
         {
-            return await this.ExecuteAsyncCommand(request, command);
+            return await this.ExecuteAsyncCommand( request, command );
         }
     }
 }

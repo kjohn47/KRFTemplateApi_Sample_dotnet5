@@ -8,10 +8,11 @@
 
   <ItemGroup>
     <Folder Include="Constants\" />
+    <Folder Include="CQRS\Sample\Model\" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="KRFCommon" Version="1.2.5.1" />
+    <PackageReference Include="KRFCommon" Version="1.2.5.3" />
   </ItemGroup>
 
 </Project>

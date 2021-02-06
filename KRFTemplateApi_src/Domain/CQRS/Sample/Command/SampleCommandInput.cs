@@ -2,7 +2,7 @@
 {
     using KRFCommon.CQRS.Command;
 
-    public class SampleCommandInput: ICommandRequest
+    public class SampleCommandInput : ICommandRequest
     {
         public int Max { get; set; }
         public int Min { get; set; }

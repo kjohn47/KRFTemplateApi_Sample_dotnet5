@@ -1,14 +1,14 @@
 ﻿namespace KRFTemplateApi.Infrastructure.Database.DataSeed
 {
-    using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
     using KRFTemplateApi.Domain.Database.Sample;
+
+    using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
     public static class SampleTableSeeder
     {
-        public static void Seed(EntityTypeBuilder<SampleTable> entity)
+        public static void Seed( EntityTypeBuilder<SampleTable> entity )
         {
-            entity.HasData(new[] {
+            entity.HasData( new[] {
                 new SampleTable {
                     Code = "Freezing",
                     Description = "It's freezing today",
@@ -69,7 +69,7 @@
                     TemperatureMin = 36,
                     TemperatureMax = 45
                 }
-            });
+            } );
         }
     }
 }

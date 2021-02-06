@@ -19,16 +19,16 @@
     public class SampleController : KRFController
     {
         [HttpGet( "ListAll" )]
-        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( ListSampleOutput ) )]
+        [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( ListSampleOutput ) )]
         public async Task<IActionResult> ListAll(
                 [FromServices] IQuery<ListSampleInput, ListSampleOutput> query,
                 [FromQuery] string code )
         {
-            return await this.ExecuteAsyncQuery( new ListSampleInput { Code=code }, query );
+            return await this.ExecuteAsyncQuery( new ListSampleInput { Code = code }, query );
         }
 
         [HttpGet( "GetData" )]
-        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
+        [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
         public async Task<IActionResult> GetData(
                 [FromServices] IQuery<SampleInput, SampleOutput> query )
         {
@@ -37,7 +37,7 @@
 
         [Authorize]
         [HttpGet( "GetDataAuth" )]
-        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
+        [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
         public async Task<IActionResult> GetDataAuth(
         [FromServices] IQuery<SampleInput, SampleOutput> query )
         {
@@ -46,7 +46,7 @@
 
         [Authorize( Policies.Admin )]
         [HttpGet( "GetDataAuthAdmin" )]
-        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
+        [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
         public async Task<IActionResult> GetDataAuthAdmin(
         [FromServices] IQuery<SampleInput, SampleOutput> query )
         {
@@ -54,7 +54,7 @@
         }
 
         [HttpPost]
-        [ProducesResponseType( (int) HttpStatusCode.OK, Type = typeof( SampleCommandOutput ) )]
+        [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( SampleCommandOutput ) )]
         public async Task<IActionResult> PostSampleData(
             [FromBody] SampleCommandInput request,
             [FromServices] ICommand<SampleCommandInput, SampleCommandOutput> command )

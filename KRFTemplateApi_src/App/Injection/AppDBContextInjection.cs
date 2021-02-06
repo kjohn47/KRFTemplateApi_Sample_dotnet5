@@ -15,7 +15,7 @@
     {
         public static void InjectDBContext( IServiceCollection services, KRFDatabases databaseSettings = null )
         {
-            if ( databaseSettings!=null&&databaseSettings.Databases!=null&&databaseSettings.Databases.Any() )
+            if ( databaseSettings != null && databaseSettings.Databases != null && databaseSettings.Databases.Any() )
             {
                 KRFDbContextInjectHelper.InjectDBContext<SampleDBContext>( services, databaseSettings.Databases.ElementAt( 0 ), databaseSettings.MigrationAssembly );
 
@@ -25,7 +25,7 @@
 
         public static void ConfigureDBContext( IApplicationBuilder app, KRFDatabases databaseSettings = null )
         {
-            if ( databaseSettings!=null&&databaseSettings.EnableAutomaticMigration&&databaseSettings.Databases!=null )
+            if ( databaseSettings != null && databaseSettings.EnableAutomaticMigration && databaseSettings.Databases != null )
             {
                 using ( var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope() )
                 {

@@ -24,15 +24,15 @@ namespace KRFTemplateApi.WebApi
                      webBuilder.UseKestrel( ( c, o ) =>
                      {
                          var kestrelSettings = c.Configuration.GetSection( KRFApiSettings.KestrelConfiguration_Key ).Get<KestrelConfiguration>();
-                         int httpPort = kestrelSettings.HttpPort==0 ? 5051 : kestrelSettings.HttpPort;
-                         int httpsPort = kestrelSettings.HttpsPort==0 ? 15051 : kestrelSettings.HttpsPort;
+                         int httpPort = kestrelSettings.HttpPort == 0 ? 5051 : kestrelSettings.HttpPort;
+                         int httpsPort = kestrelSettings.HttpsPort == 0 ? 15051 : kestrelSettings.HttpsPort;
 
                          if ( c.HostingEnvironment.IsDevelopment() )
                          {
                              o.ListenLocalhost( httpsPort, l => l.UseHttps( h =>
                              {
                                  h.AllowAnyClientCertificate();
-                                 h.ClientCertificateMode=Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
+                                 h.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
                              } ) );
                              o.ListenLocalhost( httpPort );
                          }
@@ -41,7 +41,7 @@ namespace KRFTemplateApi.WebApi
                              o.Listen( IPAddress.Any, httpsPort, l => l.UseHttps( h =>
                              {
                                  h.AllowAnyClientCertificate();
-                                 h.ClientCertificateMode=Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
+                                 h.ClientCertificateMode = Microsoft.AspNetCore.Server.Kestrel.Https.ClientCertificateMode.NoCertificate;
                              } ) );
                              o.Listen( IPAddress.Any, httpPort );
                          }

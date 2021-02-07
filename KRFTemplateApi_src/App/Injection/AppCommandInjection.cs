@@ -11,7 +11,7 @@
 
     public static class AppCommandInjection
     {
-        public static void InjectCommand( IServiceCollection services )
+        public static void InjectAppCommands( this IServiceCollection services )
         {
             services.AddTransient<ICommand<SampleCommandInput, SampleCommandOutput>, PostSampleData>();
         }

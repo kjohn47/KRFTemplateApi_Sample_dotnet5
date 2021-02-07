@@ -4,7 +4,7 @@
 
     public static class AppProxyInjection
     {
-        public static void InjectProxy( IServiceCollection services )
+        public static void InjectAppProxies( this IServiceCollection services )
         {
 
         }

@@ -52,17 +52,17 @@ namespace KRFTemplateApi.WebApi
                  l.AddEventSourceLogger();
              } );
 
-            InjectUserContext.InjectContext( services, this._apiSettings.TokenIdentifier, this._apiSettings.TokenKey );
+            services.InjectUserContext( this._apiSettings.TokenIdentifier, this._apiSettings.TokenKey );
 
             services.AddControllers();
 
-            SwaggerInit.ServiceInit( services, this._apiSettings.ApiName, this._apiSettings.TokenKey );
+            services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenKey );
 
             //Dependency injection
-            AppDBContextInjection.InjectDBContext( services, this._databases );
-            AppQueryInjection.InjectQuery( services );
-            AppCommandInjection.InjectCommand( services );
-            AppProxyInjection.InjectProxy( services );
+            services.InjectAppDBContext( this._databases );
+            services.InjectAppQueries();
+            services.InjectAppCommands();
+            services.InjectAppProxies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -85,27 +85,27 @@ namespace KRFTemplateApi.WebApi
 
             if ( this._requestContext.EnableRead && this._requestContext.MemBufferOnly )
             {
-                KRFExceptionHandlerMiddleware.Configure( app, loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier, this._requestContext.BufferSize );
+                app.KRFExceptionHandlerMiddlewareConfigure( loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier, this._requestContext.BufferSize );
             }
             else
             {
-                KRFExceptionHandlerMiddleware.Configure( app, loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier );
+                app.KRFExceptionHandlerMiddlewareConfigure( loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier );
             }
 
             app.UseHttpsRedirection();
 
             app.UseRouting();
 
-            AuthConfigure.Configure( app );
+            app.AuthConfigure();
 
             app.UseEndpoints( endpoints =>
              {
                  endpoints.MapControllers();
              } );
 
-            SwaggerInit.Configure( app, this._apiSettings.ApiName );
+            app.SwaggerConfigure( this._apiSettings.ApiName );
 
-            AppDBContextInjection.ConfigureDBContext( app, this._databases );
+            app.ConfigureAppDBContext( this._databases );
         }
     }
 }

@@ -9,7 +9,7 @@
 
     public static class AppQueryInjection
     {
-        public static void InjectQuery( IServiceCollection services )
+        public static void InjectAppQueries( this IServiceCollection services )
         {
             services.AddTransient<IQuery<SampleInput, SampleOutput>, GetSampleData>();
             services.AddTransient<IQuery<ListSampleInput, ListSampleOutput>, ListaAllSample>();

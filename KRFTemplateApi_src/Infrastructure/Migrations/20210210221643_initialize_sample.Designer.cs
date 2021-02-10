@@ -9,16 +9,16 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace KRFTemplateApi.Infrastructure.Migrations
 {
     [DbContext(typeof(SampleDBContext))]
-    [Migration("20210206163543_initialize_sample")]
+    [Migration("20210210221643_initialize_sample")]
     partial class initialize_sample
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .UseIdentityColumns()
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.2");
+                .HasAnnotation("ProductVersion", "5.0.3")
+                .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("KRFTemplateApi.Domain.Database.Sample.SampleTable", b =>
                 {

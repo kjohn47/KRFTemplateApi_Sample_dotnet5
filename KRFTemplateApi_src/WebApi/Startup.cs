@@ -5,6 +5,7 @@ namespace KRFTemplateApi.WebApi
     using KRFCommon.Context;
     using KRFCommon.Database;
     using KRFCommon.Handler;
+    using KRFCommon.MemoryCache;
     using KRFCommon.Swagger;
 
     using KRFTemplateApi.App.Injection;
@@ -25,6 +26,7 @@ namespace KRFTemplateApi.WebApi
             this._requestContext = configuration.GetSection( KRFApiSettings.RequestContext_Key ).Get<RequestContext>();
             this._databases = configuration.GetSection( KRFApiSettings.KRFDatabases_Key ).Get<KRFDatabases>();
             this._enableLogs = configuration.GetValue( KRFApiSettings.LogsOnPrd_Key, false );
+            this._cacheMemorySettings = configuration.GetSection( KRFApiSettings.MemoryCacheSettings_Key ).Get<KRFMemoryCacheSettings>() ?? new KRFMemoryCacheSettings();
 
             this.HostingEnvironment = env;
         }
@@ -33,6 +35,7 @@ namespace KRFTemplateApi.WebApi
         private readonly RequestContext _requestContext;
         private readonly KRFDatabases _databases;
         private readonly bool _enableLogs;
+        private readonly KRFMemoryCacheSettings _cacheMemorySettings;
 
         public IWebHostEnvironment HostingEnvironment { get; }
         public IConfiguration Configuration { get; }
@@ -42,21 +45,23 @@ namespace KRFTemplateApi.WebApi
         {
             //Add logger config
             services.AddLogging( l =>
-             {
-                 var config = this.Configuration.GetSection( KRFApiSettings.Logging_Key );
-                 l.ClearProviders();
-                 l.AddConfiguration( config );
-                 l.AddConsole();
-                 l.AddDebug();
-                 l.AddEventLog();
-                 l.AddEventSourceLogger();
-             } );
+            {
+                var config = this.Configuration.GetSection( KRFApiSettings.Logging_Key );
+                l.ClearProviders();
+                l.AddConfiguration( config );
+                l.AddConsole();
+                l.AddDebug();
+                l.AddEventLog();
+                l.AddEventSourceLogger();
+            } );
 
             services.InjectUserContext( this._apiSettings.TokenIdentifier, this._apiSettings.TokenKey );
 
             services.AddControllers();
 
             services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenKey );
+
+            services.AddKRFMemoryCache( this._cacheMemorySettings );
 
             //Dependency injection
             services.InjectAppDBContext( this._databases );
@@ -99,9 +104,9 @@ namespace KRFTemplateApi.WebApi
             app.AuthConfigure();
 
             app.UseEndpoints( endpoints =>
-             {
-                 endpoints.MapControllers();
-             } );
+            {
+                endpoints.MapControllers();
+            } );
 
             app.SwaggerConfigure( this._apiSettings.ApiName );
 

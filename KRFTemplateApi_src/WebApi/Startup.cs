@@ -74,28 +74,21 @@ namespace KRFTemplateApi.WebApi
         public void Configure( IApplicationBuilder app, ILoggerFactory loggerFactory )
         {
             //server config settings
-            var enableLogs = this._enableLogs;
+            var isDev = this.HostingEnvironment.IsDevelopment();
 
-
-            if ( this.HostingEnvironment.IsDevelopment() )
+            if ( isDev )
             {
                 app.UseDeveloperExceptionPage();
-                enableLogs = true;
             }
 
-            if ( enableLogs && this._requestContext.EnableRead )
-            {
-                app.UseMiddleware<KRFBodyRewindMiddleware>( this._requestContext.BufferSize, this._requestContext.MemBufferOnly );
-            }
-
-            if ( this._requestContext.EnableRead && this._requestContext.MemBufferOnly )
-            {
-                app.KRFExceptionHandlerMiddlewareConfigure( loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier, this._requestContext.BufferSize );
-            }
-            else
-            {
-                app.KRFExceptionHandlerMiddlewareConfigure( loggerFactory, enableLogs, this._apiSettings.ApiName, this._apiSettings.TokenIdentifier );
-            }
+            app.KRFExceptionHandlerMiddlewareConfigure(
+                loggerFactory,
+                ( this._enableLogs || isDev ),
+                this._apiSettings.ApiName,
+                this._apiSettings.TokenIdentifier,
+                this._requestContext.EnableRead,
+                this._requestContext.MemBufferOnly,
+                this._requestContext.BufferSize );
 
             app.UseHttpsRedirection();
 

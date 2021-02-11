@@ -1,7 +1,6 @@
 ﻿namespace KRFTemplateApi.App.Injection
 {
     using System;
-    using System.Linq;
 
     using KRFCommon.Database;
 
@@ -15,17 +14,17 @@
     {
         public static void InjectAppDBContext( this IServiceCollection services, KRFDatabases databaseSettings = null )
         {
-            if ( databaseSettings != null && databaseSettings.Databases != null && databaseSettings.Databases.Any() )
-            {
-                services.InjectDBContext<SampleDBContext>( databaseSettings.Databases.ElementAt( 0 ), databaseSettings.MigrationAssembly );
+            //Context inject
+            services.InjectDBContext<SampleDBContext>( databaseSettings );
 
-                services.AddScoped( x => new Lazy<ISampleDatabaseQuery>( () => new SampleDatabaseQuery( x.GetService<SampleDBContext>() ) ) );
-            }
+            //Inject database query handlers
+            services.AddScoped( x => new Lazy<ISampleDatabaseQuery>( () => new SampleDatabaseQuery( x.GetService<SampleDBContext>() ) ) );
         }
 
         public static void ConfigureAppDBContext( this IApplicationBuilder app, KRFDatabases databaseSettings = null )
         {
-            if ( databaseSettings != null && databaseSettings.EnableAutomaticMigration && databaseSettings.Databases != null )
+            //Inject Migration Automation
+            if ( databaseSettings != null && databaseSettings.EnableAutomaticMigration )
             {
                 using ( var serviceScope = app.ApplicationServices.GetRequiredService<IServiceScopeFactory>().CreateScope() )
                 {

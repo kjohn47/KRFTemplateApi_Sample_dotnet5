@@ -59,7 +59,7 @@ namespace KRFTemplateApi.WebApi
 
             services.AddControllers();
 
-            services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenKey );
+            services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenIdentifier );
 
             services.AddKRFMemoryCache( this._cacheMemorySettings );
 

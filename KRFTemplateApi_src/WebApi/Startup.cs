@@ -81,14 +81,12 @@ namespace KRFTemplateApi.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.KRFExceptionHandlerMiddlewareConfigure(
+            app.KRFLogAndExceptionHandlerConfigure(
                 loggerFactory,
                 ( this._enableLogs || isDev ),
                 this._apiSettings.ApiName,
                 this._apiSettings.TokenIdentifier,
-                this._requestContext.EnableRead,
-                this._requestContext.MemBufferOnly,
-                this._requestContext.BufferSize );
+                this._requestContext.EnableRequestRead );
 
             app.UseHttpsRedirection();
 

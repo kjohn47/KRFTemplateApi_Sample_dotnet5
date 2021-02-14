@@ -5,17 +5,17 @@ VisualStudioVersion = 16.0.30717.126
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KRFTemplateApi_src", "KRFTemplateApi_src", "{EC5A65AE-F187-46E3-99A7-CB665B2D91D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "KRFTemplateApi_src\Domain\Domain.csproj", "{B3FA189A-4050-4FDA-BDBE-8CF64C13623A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Domain", "KRFTemplateApi_src\Domain\Domain.csproj", "{B3FA189A-4050-4FDA-BDBE-8CF64C13623A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "KRFTemplateApi_src\Infrastructure\Infrastructure.csproj", "{9E23F58D-2C09-4D8F-BD20-DEE8D29C7434}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Infrastructure", "KRFTemplateApi_src\Infrastructure\Infrastructure.csproj", "{9E23F58D-2C09-4D8F-BD20-DEE8D29C7434}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "App", "KRFTemplateApi_src\App\App.csproj", "{BDC808FD-FA86-4C66-87F0-7064BD2A15CB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "App", "KRFTemplateApi_src\App\App.csproj", "{BDC808FD-FA86-4C66-87F0-7064BD2A15CB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "KRFTemplateApi_src\WebApi\WebApi.csproj", "{16AC8A8B-471D-4F3D-BEF7-40EAA469DD74}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApi", "KRFTemplateApi_src\WebApi\WebApi.csproj", "{16AC8A8B-471D-4F3D-BEF7-40EAA469DD74}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "KRFTemplateApi_Tests", "KRFTemplateApi_Tests", "{38F94E9C-3E28-4131-BCFA-FDDF1CC91359}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTest", "KRFTemplateApi_Tests\UnitTest\UnitTest.csproj", "{D2878BE7-78BD-41B5-B13E-89D166F34CCF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UnitTest", "KRFTemplateApi_Tests\UnitTest\UnitTest.csproj", "{D2878BE7-78BD-41B5-B13E-89D166F34CCF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

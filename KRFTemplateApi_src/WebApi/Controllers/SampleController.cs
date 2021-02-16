@@ -1,4 +1,4 @@
-﻿namespace KRFTemplateApi.WebApi.Controllers.Sample
+﻿namespace KRFTemplateApi.WebApi.Controllers
 {
     using System.Net;
     using System.Threading.Tasks;

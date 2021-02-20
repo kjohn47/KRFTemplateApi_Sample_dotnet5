@@ -17,6 +17,7 @@ namespace KRFTemplateApi.WebApi
     using Microsoft.Extensions.DependencyInjection;
     using Microsoft.Extensions.Hosting;
     using Microsoft.Extensions.Logging;
+    using KRFCommon.Proxy;
 
     public class Startup
     {
@@ -27,6 +28,7 @@ namespace KRFTemplateApi.WebApi
             this._requestContext = configuration.GetSection( KRFApiSettings.RequestContext_Key ).Get<RequestContext>();
             this._databases = configuration.GetSection( KRFApiSettings.KRFDatabases_Key ).Get<KRFDatabases>();
             this._enableLogs = configuration.GetValue( KRFApiSettings.LogsOnPrd_Key, false );
+            this._externalServices = configuration.GetSection( KRFApiSettings.KRFExternalServices_Key ).Get<KRFExternalServices>();
             this.HostingEnvironment = env;
         }
 
@@ -34,7 +36,7 @@ namespace KRFTemplateApi.WebApi
         private readonly RequestContext _requestContext;
         private readonly KRFDatabases _databases;
         private readonly bool _enableLogs;
-
+        private readonly KRFExternalServices _externalServices;
         public IWebHostEnvironment HostingEnvironment { get; }
         public IConfiguration Configuration { get; }
 
@@ -55,7 +57,10 @@ namespace KRFTemplateApi.WebApi
 
             services.InjectUserContext( this._apiSettings.TokenIdentifier, this._apiSettings.TokenKey );
 
-            services.AddControllers();
+            services.AddControllers( o =>
+            {
+                o.AllowEmptyInputInBodyModelBinding = true;
+            } );
 
             services.SwaggerInit( this._apiSettings.ApiName, this._apiSettings.TokenIdentifier );
 
@@ -65,7 +70,7 @@ namespace KRFTemplateApi.WebApi
             services.InjectAppDBContext( this._databases );
             services.InjectAppQueries();
             services.InjectAppCommands();
-            services.InjectAppProxies();
+            services.InjectAppProxies( this._externalServices );
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

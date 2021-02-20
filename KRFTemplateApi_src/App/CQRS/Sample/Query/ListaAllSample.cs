@@ -9,7 +9,7 @@
     using KRFCommon.MemoryCache;
 
     using KRFTemplateApi.App.Constants;
-    using KRFTemplateApi.App.DatabaseQueries;
+    using KRFTemplateApi.Infrastructure.Database.Queries;
     using KRFTemplateApi.Domain.CQRS.Sample.Query;
 
     public class ListaAllSample : IQuery<ListSampleInput, ListSampleOutput>

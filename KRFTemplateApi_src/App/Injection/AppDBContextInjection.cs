@@ -4,7 +4,7 @@
 
     using KRFCommon.Database;
 
-    using KRFTemplateApi.App.DatabaseQueries;
+    using KRFTemplateApi.Infrastructure.Database.Queries;
     using KRFTemplateApi.Infrastructure.Database.Context;
 
     using Microsoft.AspNetCore.Builder;

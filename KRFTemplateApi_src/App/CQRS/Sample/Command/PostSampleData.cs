@@ -8,7 +8,7 @@
     using KRFCommon.CQRS.Validator;
     using KRFCommon.Database;
 
-    using KRFTemplateApi.App.DatabaseQueries;
+    using KRFTemplateApi.Infrastructure.Database.Queries;
     using KRFTemplateApi.Domain.CQRS.Sample.Command;
 
     public class PostSampleData : ICommand<SampleCommandInput, SampleCommandOutput>

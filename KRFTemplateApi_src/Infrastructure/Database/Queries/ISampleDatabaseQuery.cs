@@ -1,4 +1,4 @@
-﻿namespace KRFTemplateApi.App.DatabaseQueries
+﻿namespace KRFTemplateApi.Infrastructure.Database.Queries
 {
     using System;
     using System.Collections.Generic;

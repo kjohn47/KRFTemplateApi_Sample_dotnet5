@@ -10,7 +10,7 @@
 
     using KRFCommon.CQRS.Query;
 
-    using KRFTemplateApi.App.DatabaseQueries;
+    using KRFTemplateApi.Infrastructure.Database.Queries;
     using KRFTemplateApi.Domain.CQRS.Sample.Query;
 
     using Newtonsoft.Json;

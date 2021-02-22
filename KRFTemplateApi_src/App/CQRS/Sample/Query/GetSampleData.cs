@@ -35,7 +35,7 @@
                 Date = DateTime.Now.AddDays( index ),
                 TemperatureC = temp,
                 Summary = dbResult != null ? string.Format( "{0} -> {1}", dbResult.Code, dbResult.Description ) : "Temperature summary not found",
-                UserData = this._userContext != null && this._userContext.Claim != Claims.NotLogged ? JsonSerializer.Serialize( new KRFJwt( this._userContext ), KRFJsonSerializerOptions.GetJsonSerializerOptions() ) : "No User"
+                UserData = this._userContext != null && this._userContext.Claim != Claims.NotLogged ? JsonSerializer.Serialize( this._userContext, KRFJsonSerializerOptions.GetJsonSerializerOptions() ) : "No User"
             };
         }
 

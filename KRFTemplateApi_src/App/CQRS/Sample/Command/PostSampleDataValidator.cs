@@ -14,24 +14,24 @@
         {
             this.RuleFor( r => r.Min )
                 .LessThan( r => r.Max )
-                .WithErrorCode( HttpStatusCode.BadRequest.ToString() )
+                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.BadRequest, "MINMAXERR" ) )
                 .WithMessage( "Min Value must be smaller than Max Value" );
 
 
             this.RuleFor( r => r.Code )
                 .NotNull()
-                .WithErrorCode( HttpStatusCode.BadRequest.ToString() )
+                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.BadRequest, "MISSINGCODEERR" ) )
                 .WithMessage( "You must add a Code" )
                 .NotEmpty()
-                .WithErrorCode( HttpStatusCode.OK.ToString() )
+                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.OK, "EMPTYCODEERR" ) )
                 .WithMessage( "Code Value cannot be empty" );
 
             this.RuleFor( r => r.Description )
                 .NotNull()
-                .WithErrorCode( HttpStatusCode.BadRequest.ToString() )
+                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.BadRequest, "MISSINGDESCERR" ) )
                 .WithMessage( "You must add a Description" )
                 .NotEmpty()
-                .WithErrorCode( HttpStatusCode.OK.ToString() )
+                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.OK, "EMPTYDESCERR" ) )
                 .WithMessage( "Description Value cannot be empty" );
         }
     }

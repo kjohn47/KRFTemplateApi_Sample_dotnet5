@@ -11,6 +11,7 @@
     using KRFTemplateApi.App.Constants;
     using KRFTemplateApi.Infrastructure.Database.Queries;
     using KRFTemplateApi.Domain.CQRS.Sample.Query;
+    using KRFCommon.Constants;
 
     public class ListaAllSample : IQuery<ListSampleInput, ListSampleOutput>
     {
@@ -28,8 +29,8 @@
             var result = await this._memoryCache.GetCachedItemWithHandlerAsync(
                 AppConstants.SampleCacheKey,
                 () => this._sampleDB.GetSampleListAsync( request?.Code ),
-                !string.IsNullOrEmpty( request?.Code ), 
-                x => ( !string.IsNullOrEmpty( request?.Code ) && !x.CacheMiss ) 
+                !string.IsNullOrEmpty( request?.Code ),
+                x => ( !string.IsNullOrEmpty( request?.Code ) && !x.CacheMiss )
                     ? x.Result.Where( x => x.Code.Contains( request.Code, StringComparison.InvariantCultureIgnoreCase ) )
                     : x.Result );
 

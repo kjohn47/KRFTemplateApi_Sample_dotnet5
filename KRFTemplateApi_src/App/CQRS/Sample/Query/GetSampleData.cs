@@ -14,6 +14,7 @@
     using KRFTemplateApi.Domain.CQRS.Sample.Query;
     using System.Text.Json;
     using KRFCommon.JSON;
+    using KRFCommon.Constants;
 
     public class GetSampleData : IQuery<SampleInput, SampleOutput>
     {

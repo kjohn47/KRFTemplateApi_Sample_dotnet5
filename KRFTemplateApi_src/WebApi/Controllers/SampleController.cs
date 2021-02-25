@@ -11,7 +11,6 @@
     using KRFTemplateApi.Domain.CQRS.Sample.Command;
     using KRFTemplateApi.Domain.CQRS.Sample.Query;
 
-    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     [ApiController]
@@ -35,7 +34,7 @@
             return await this.ExecuteAsyncQuery( new SampleInput(), query );
         }
 
-        [Authorize]
+        [KRFUserAuthorize]
         [HttpGet( "GetDataAuth" )]
         [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
         public async Task<IActionResult> GetDataAuth(
@@ -44,7 +43,7 @@
             return await this.ExecuteAsyncQuery( new SampleInput(), query );
         }
 
-        [Authorize( Policies.Admin )]
+        [KRFAdminAuthorize]
         [HttpGet( "GetDataAuthAdmin" )]
         [ProducesResponseType( ( int ) HttpStatusCode.OK, Type = typeof( SampleOutput ) )]
         public async Task<IActionResult> GetDataAuthAdmin(

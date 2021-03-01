@@ -11,7 +11,6 @@
     using KRFTemplateApi.App.Constants;
     using KRFTemplateApi.Infrastructure.Database.Queries;
     using KRFTemplateApi.Domain.CQRS.Sample.Query;
-    using KRFCommon.Constants;
 
     public class ListaAllSample : IQuery<ListSampleInput, ListSampleOutput>
     {

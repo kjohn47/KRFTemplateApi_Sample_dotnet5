@@ -19,7 +19,7 @@
             this._sampleDB = sampleDB.Value;
         }
 
-        public async Task<ICommandValidationError> ExecuteValidationAsync( SampleCommandInput request )
+        public async Task<IValidationResult> ExecuteValidationAsync( SampleCommandInput request )
         {
             IKRFValidator<SampleCommandInput> validator = new PostSampleDataValidator();
             return await validator.CheckValidationAsync( request );

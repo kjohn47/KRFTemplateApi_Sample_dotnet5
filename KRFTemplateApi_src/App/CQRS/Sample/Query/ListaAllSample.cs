@@ -11,6 +11,8 @@
     using KRFTemplateApi.App.Constants;
     using KRFTemplateApi.Infrastructure.Database.Queries;
     using KRFTemplateApi.Domain.CQRS.Sample.Query;
+    using System.Collections.Generic;
+    using KRFTemplateApi.Domain.Database.Sample;
 
     public class ListaAllSample : IQuery<ListSampleInput, ListSampleOutput>
     {
@@ -25,13 +27,15 @@
 
         public async Task<IResponseOut<ListSampleOutput>> QueryAsync( ListSampleInput request )
         {
-            var result = await this._memoryCache.GetCachedItemWithHandlerAsync(
+            var result = await this._memoryCache.GetOrInsertCachedItemAsync(
                 AppConstants.SampleCacheKey,
                 () => this._sampleDB.GetSampleListAsync( request?.Code ),
-                !string.IsNullOrEmpty( request?.Code ),
                 x => ( !string.IsNullOrEmpty( request?.Code ) && !x.CacheMiss )
-                    ? x.Result.Where( x => x.Code.Contains( request.Code, StringComparison.InvariantCultureIgnoreCase ) )
-                    : x.Result );
+                     ? x.Result.Where( x => x.Code.Contains( request.Code, StringComparison.InvariantCultureIgnoreCase ) )
+                     : x.Result,
+                x => ( !string.IsNullOrEmpty( request?.Code ) || x.Count() == 0 )
+                     ? MemoryCacheHandlerResult<IEnumerable<SampleTable>>.ReturnNotCachedResult( x )
+                     : MemoryCacheHandlerResult<IEnumerable<SampleTable>>.ReturnResult( x ) );
 
             if ( result == null || !result.Any() )
             {

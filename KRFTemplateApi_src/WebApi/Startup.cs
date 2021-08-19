@@ -4,7 +4,6 @@ namespace KRFTemplateApi.WebApi
     using KRFCommon.Constants;
     using KRFCommon.Context;
     using KRFCommon.Database;
-    using KRFCommon.Middleware;
     using KRFCommon.Logger;
     using KRFCommon.MemoryCache;
     using KRFCommon.Swagger;
@@ -72,21 +71,7 @@ namespace KRFTemplateApi.WebApi
                 app.UseDeveloperExceptionPage();
             }
 
-            app.KRFLogAndExceptionHandlerConfigure(
-                loggerFactory,
-                this._apiSettings,
-                isDev );
-
-            app.UseHttpsRedirection();
-
-            app.UseRouting();
-
-            app.AuthConfigure( !isDev );
-
-            app.UseEndpoints( endpoints =>
-            {
-                endpoints.MapControllers();
-            } );
+            app.ApiConfigure( this._apiSettings, loggerFactory, isDev );
 
             app.SwaggerConfigure( this._apiSettings.ApiName );
 

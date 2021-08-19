@@ -10,28 +10,28 @@
 
     public class PostSampleDataValidator : KRFValidator<SampleCommandInput>, IKRFValidator<SampleCommandInput>
     {
-        public PostSampleDataValidator() : base()
+        public PostSampleDataValidator()
+            : base( HttpStatusCode.BadRequest, CascadeMode.Continue )
         {
             this.RuleFor( r => r.Min )
                 .LessThan( r => r.Max )
-                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.BadRequest, "MINMAXERR" ) )
+                .WithErrorCode( "MINMAXERR" )
                 .WithMessage( "Min Value must be smaller than Max Value" );
-
 
             this.RuleFor( r => r.Code )
                 .NotNull()
-                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.BadRequest, "MISSINGCODEERR" ) )
+                .WithErrorCode( "MISSINGCODEERR" )
                 .WithMessage( "You must add a Code" )
                 .NotEmpty()
-                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.OK, "EMPTYCODEERR" ) )
+                .WithErrorCode( "EMPTYCODEERR" )
                 .WithMessage( "Code Value cannot be empty" );
 
             this.RuleFor( r => r.Description )
                 .NotNull()
-                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.BadRequest, "MISSINGDESCERR" ) )
+                .WithErrorCode( "MISSINGDESCERR" )
                 .WithMessage( "You must add a Description" )
                 .NotEmpty()
-                .WithErrorCode( GenerateErrorCodeWithHttpStatus( HttpStatusCode.OK, "EMPTYDESCERR" ) )
+                .WithErrorCode( "EMPTYDESCERR" )
                 .WithMessage( "Description Value cannot be empty" );
         }
     }

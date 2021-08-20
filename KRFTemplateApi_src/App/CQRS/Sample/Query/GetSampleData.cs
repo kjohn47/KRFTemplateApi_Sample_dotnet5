@@ -20,9 +20,9 @@
         private IUserContext _userContext;
 
         private ISampleDatabaseQuery _sampleDB;
-        public GetSampleData( IUserContext userContext, Lazy<ISampleDatabaseQuery> sampleDB )
+        public GetSampleData( IUserContextBuilder userContext, Lazy<ISampleDatabaseQuery> sampleDB )
         {
-            this._userContext = userContext;
+            this._userContext = userContext.GetContext();
             this._sampleDB = sampleDB.Value;
         }
 
